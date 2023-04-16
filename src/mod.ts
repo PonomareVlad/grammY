@@ -42,6 +42,7 @@ export {
 export { type Filter, type FilterQuery, matchFilter } from "./filter.ts";
 
 // Internal stuff for expert users
+export { createFormDataPayload } from "./core/payload.ts";
 export { Api } from "./core/api.ts";
 export {
     type ApiCallFn,
