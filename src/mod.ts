@@ -7,7 +7,7 @@ export {
     type PollingOptions,
 } from "./bot.ts";
 
-export { InputFile } from "./types.ts";
+export { InputFile, LanguageCodes } from "./types.ts";
 
 export {
     type CallbackQueryContext,
