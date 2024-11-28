@@ -14,7 +14,10 @@
     },
     "scripts": {
         "prepare": "npm run backport",
-        "backport": "deno2node tsconfig.json"
+        "backport": "deno2node tsconfig.json",
+        "bundle-web": "npx deno-bin task bundle-web",
+        "bundle-web-types": "npx deno-bin task bundle-web-types",
+        "postbackport": "npm run bundle-web && npm run bundle-web-types"
     },
     "dependencies": {
         "@grammyjs/types": "3.16.0",
