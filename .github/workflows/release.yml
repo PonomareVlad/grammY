@@ -21,6 +21,7 @@ jobs:
 
             - run: npm install
             - run: deno task bundle-web
+            - run: deno task bundle-web-types
 
             - name: Publish to npm
               run: |
