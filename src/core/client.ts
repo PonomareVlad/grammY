@@ -316,11 +316,10 @@ class ApiClient<R extends RawApi> {
         const sig = controller.signal;
         const options = { ...opts.baseFetchConfig, signal: sig, ...config };
         // Perform fetch call, and handle networking errors
-        const wrapHttpError = toHttpError(method, opts.sensitiveLogs);
         const successPromise = this.fetch(
             url instanceof URL ? url.href : url,
             options,
-        ).catch(wrapHttpError);
+        ).catch(toHttpError(method, opts.sensitiveLogs));
         // Those are the three possible outcomes of the fetch call:
         const operations = [successPromise, streamErr.promise, timeout.promise];
         // Wait for result
@@ -328,7 +327,7 @@ class ApiClient<R extends RawApi> {
             const res = await Promise.race(operations);
             return await res.json().catch((err: unknown) => {
                 if (err instanceof SyntaxError) throw err;
-                wrapHttpError(err);
+                toHttpError(method, opts.sensitiveLogs)(err);
             });
         } finally {
             if (timeout.handle !== undefined) clearTimeout(timeout.handle);
